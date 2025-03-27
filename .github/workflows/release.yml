@@ -77,8 +77,9 @@ jobs:
       - name: Package try-runtime
         working-directory: try-runtime-cli/${{ env.path }}
         run: |
-          ${{ env.sha }} try-runtime-cli > try-runtime-cli.sha256
-          tar -czf ${{ env.archive }} try-runtime-cli try-runtime-cli.sha256
+          mv try-runtime try-runtime-cli
+          ${{ env.sha }} try-runtime-cli > try-runtime.sha256
+          tar -czf ${{ env.archive }} try-runtime-cli try-runtime.sha256
 
       # Add package to workflow
       - name: Upload archives
