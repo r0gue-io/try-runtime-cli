@@ -63,12 +63,11 @@ jobs:
         run: brew install protobuf
 
       # Configure Rust toolchain
-      - name: Setup Rust
-        uses: actions-rs/toolchain@v1
-        with:
-          profile: minimal
-          toolchain: stable
-          override: true
+      - name: Set Rust version
+        run: |
+         rustup default stable
+         rustup component add rust-src
+         rustup target add ${{ matrix.platform.target }} wasm32-unknown-unknown
 
       # Build and package
       - name: Build ${{ matrix.package }}
